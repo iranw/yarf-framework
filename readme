@@ -1,8 +1,0 @@
-
-        "doctrine/orm": "2.4.7",
-
-
-        {
-            "type": "vcs",
-            "url": "https://github.com/iranw/irpackagist2"
-        },
