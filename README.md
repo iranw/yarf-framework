@@ -8,6 +8,8 @@
 > * 识别Post/Get接口请求
 > * 实现Restful请求
 > * 实现Yar单请求以及并发请求
+> * 接口集成ORM(填补yaf短板)
+> * 集成Cache层
 
 注:同一url可以实现`post`/`get`/`restful`/`yar`请求
 
