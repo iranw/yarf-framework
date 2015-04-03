@@ -9,6 +9,8 @@
 > * 实现Restful请求
 > * 实现Yar单请求以及并发请求
 
+注:同一url可以实现`post`/`get`/`restful`/`yar`请求
+
 ###框架目录
 
     ###### 组织架构如下: 
@@ -35,11 +37,11 @@
 
 
 
-## 样例演示
+### 样例演示
 
 以[http://192.168.8.234:7070/user/index/get](http://192.168.8.234:7070/user/index/get)为请求对象
 
-### 1、Post/Get请求
+###### 1、`Post/Get`请求 示例如下:
 
 ```php
 <?php
@@ -67,3 +69,46 @@ function curl_by_post($url,$post) {
     return $result;
 }
 ```
+
+###### 2、`Restful`请求 示例如下:
+
+```php
+<?php
+$url = "http://192.168.8.234:7070/user/index/get/uid/300";
+$response = file_get_contents($url);
+echo $response."<br>\n";
+
+$url = "http://192.168.8.234:7070/user/index/del/uid/300";
+$response = file_get_contents($url);
+echo $response."<br>\n";
+```
+
+###### 3、yar请求 示例如下
+
+```php
+<?php
+$params = array('uid'=>2548);
+$rpcUrl = 'http://192.168.8.234:7070/user/index/get';
+$client = new yar_client($rpcUrl);
+$result = $client->run($params);
+var_dump($result);
+```
+
+###### 4、yar并发请求 示例如下:
+
+```php
+<?php
+$params = array('uid'=>2548);
+
+Yar_Concurrent_Client::call("http://192.168.8.234:7070/user/index/get", "run", array($params), "callback");
+Yar_Concurrent_Client::call("http://192.168.8.234:7070/user/index/del", "run", array($params), "callback");
+Yar_Concurrent_Client::loop("callback", "error_callback"); //send the requests, 
+
+function callback($retval, $callinfo) {
+    echo $retval."\n<br>\n";
+}
+function error_callback($type, $error, $callinfo) {
+    error_log($error);
+}
+```
+
