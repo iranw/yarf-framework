@@ -1,0 +1,14 @@
+{    
+    "require": {
+        "illuminate/database": "4.1.30",
+        "doctrine/cache": "1.4.0",
+    	"iran/test": "1.0",
+        "iran/irpackagist3": "1.0"
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://bitbucket.org/iranw/test"
+        }
+    ]
+}
